@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lucas Petry | Analista de Dados Estratégico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .font-oswald {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .font-space {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* GenLabs Utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .curve-separator {
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='60' viewBox='0 0 20 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 1C18 1 1 15 1 30C1 45 18 59 18 59' stroke='%23CBD5E1' stroke-width='0.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 20px;
+            height: 40px;
+        }
+
+        .perspective-distant {
+            perspective: 1200px;
+        }
+
+        .transform-style-preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        .parallax-layer {
+            transition: transform 0.1s ease-out;
+        }
+
+        .dot-grid {
+            background-size: 30px 30px;
+            background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+        }
+
+        /* FutureAI Utilities */
+        .tech-card {
+            background-color: #171717;
+            border: 1px solid #262626;
+            border-radius: 1.5rem;
+            padding: 1.75rem;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .tech-card:hover {
+            background-color: #0a0a0a;
+            border-color: #fb923c40;
+            transform: translateY(-8px);
+        }
+
+        .tech-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #737373;
+        }
+
+        /* Kinetic Timeline REDESIGN */
+        .timeline-section {
+            background-color: #0a0a0a;
+            position: relative;
+            padding: 120px 0 60px 0;
+            min-height: 150vh;
+        }
+
+        .timeline-path-container {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(-50%);
+        }
+
+        .timeline-progress-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, transparent, #fb923c, #fb923c);
+            height: 0%;
+            box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
+            transition: height 0.3s ease-out;
+        }
+
+        .year-node {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            border: 2px solid #262626;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 40;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .year-node.active {
+            border-color: #fb923c;
+            box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+        }
+
+        .year-node .year-inner {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #262626;
+            transition: all 0.5s ease;
+        }
+
+        .year-node.active .year-inner {
+            background: #fb923c;
+            transform: scale(2);
+        }
+
+        .year-label {
+            position: absolute;
+            top: 50%;
+            left: 60px;
+            transform: translateY(-50%);
+            color: #737373;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transition: all 0.5s ease;
+            white-space: nowrap;
+        }
+
+        .year-node.active .year-label {
+            opacity: 1;
+            color: white;
+            transform: translateY(-50%) translateX(10px);
+        }
+
+        /* Section 3: Project Showcase Styles */
+        .project-section {
+            background-color: #050505;
+            border-top: 1px solid #171717;
+        }
+
+        /* Section 4: Testimonials Styles */
+        .testimonial-section {
+            height: 800px;
+            background: linear-gradient(to bottom, transparent, rgba(9, 9, 11, 0.8), #09090b);
+            border-top: 1px solid #171717;
+        }
+
+        .testimonial-columns-container {
+            height: 600px;
+            display: flex;
+            gap: 1.5rem;
+            overflow: hidden;
+            /* Added to contain scrolling content */
+        }
+
+        .testimonial-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: scrollVertical linear infinite;
+        }
+
+        .testimonial-column.reverse {
+            animation-direction: reverse;
+        }
+
+        @keyframes scrollVertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .testimonial-card {
+            background: rgba(24, 24, 27, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(23, 23, 23, 0.8);
+            border-color: #fb923c30;
+            transform: scale(1.02);
+        }
+
+        .experience-row {
+            display: flex;
+            align-items: center;
+            min-height: 250px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-bottom: 5vh;
+        }
+
+        .experience-row.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-content {
+            width: 45%;
+        }
+
+        .experience-spacer {
+            width: 10%;
+            position: relative;
+            align-self: stretch;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Hero Section Refinements */
+        .hero-title {
+            letter-spacing: -0.04em;
+            line-height: 0.82;
+        }
+
+        /* Floating Badge Animation */
+        .floating-badge {
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        /* Button Refinements (From Future UI) */
+        .btn-primary-future {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn-primary-future::after {
+            content: "";
+            background: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            inset: 0;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-primary-future:hover::after {
+            transform: translateY(0);
+        }
+
+        .btn-secondary-future {
+            position: relative;
+            background: white;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-future::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            padding: 1px;
+            border-radius: 9999px;
+            background: linear-gradient(180deg, rgba(251, 146, 60, 0.5), transparent, rgba(251, 146, 60, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-secondary-future:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary-future:hover {
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(251, 146, 60, 0.1);
+        }
+
+        /* Background Geometry */
+        .geometry-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        @keyframes float1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(10px, -20px) rotate(5deg);
+            }
+        }
+
+        @keyframes float2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-15px, 15px) rotate(-8deg);
+            }
+        }
+
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .float-1 {
+            animation: float1 8s ease-in-out infinite;
+        }
+
+        .float-2 {
+            animation: float2 10s ease-in-out infinite;
+        }
+
+        .spin-slow {
+            animation: spinSlow 20s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .stagger-1 {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-brand-orange/20 overflow-x-hidden">
+
+    <!-- Hero Section (GenLabs) -->
+    <div
+        class="fixed inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 lg:px-20 w-full h-full opacity-30">
+        <div class="h-full w-[1px] bg-zinc-300"></div>
+        <div class="h-full w-[1px] bg-zinc-300 hidden md:block"></div>
+        <div class="h-full w-[1px] bg-zinc-300 hidden lg:block"></div>
+        <div class="h-full w-[1px] bg-zinc-300 hidden lg:block"></div>
+        <div class="h-full w-[1px] bg-zinc-300"></div>
+    </div>
+    <div id="dot-bg" class="fixed inset-0 dot-grid pointer-events-none z-0 opacity-40"></div>
+
+    <!-- Background Geometry Layer -->
+    <div class="geometry-layer">
+        <div class="absolute top-[10%] left-[15%] w-32 h-32 border border-zinc-200/50 rounded-full float-1"></div>
+        <div class="absolute top-[60%] left-[80%] w-24 h-24 bg-zinc-100/30 rounded-lg float-2 shadow-xl"></div>
+        <div
+            class="absolute top-[20%] left-[70%] w-40 h-40 border-t border-r border-zinc-200/40 rounded-tr-[4rem] spin-slow">
+        </div>
+    </div>
+
+    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center p-6 md:p-12 lg:p-20">
+        <div class="max-w-[1300px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+
+            <!-- LEFT: Text Content -->
+            <div class="lg:col-span-7 space-y-8">
+                <!-- Eyebrow -->
+                <div class="space-y-1 slide-up stagger-1">
+                    <p class="text-[10px] uppercase font-bold text-brand-orange tracking-[0.2em]">Lucas Petry</p>
+                    <p
+                        class="text-[10px] uppercase font-medium text-zinc-400 tracking-[0.15em] flex items-center gap-2">
+                        <span>Analista de Dados Estratégico</span>
+                        <span class="w-1 h-1 rounded-full bg-zinc-300 inline-block"></span>
+                        <span class="font-mono text-zinc-300 text-[9px]">SYS.LOAD(ANALYTICS)</span>
+                    </p>
+                </div>
+
+                <!-- Headline — smaller size so it fits comfortably -->
+                <h1
+                    class="text-5xl lg:text-[5.5rem] font-medium text-zinc-900 tracking-tighter leading-[0.88] slide-up stagger-2">
+                    Movendo o ponteiro <br />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-200 font-light italic">com
+                        precisão.</span>
+                </h1>
+
+                <!-- Description -->
+                <p
+                    class="text-sm lg:text-base text-zinc-500 max-w-md leading-relaxed border-l-2 border-zinc-200 pl-6 slide-up stagger-3 font-medium">
+                    Especialista em transformar ambientes de dados caóticos em centros de crescimento estratégico.
+                    Da modelagem estatística aos dashboards executivos, torno a complexidade acionável.
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-wrap gap-4 slide-up stagger-4">
+                    <button
+                        class="btn-primary-future relative flex items-center gap-3 transition-all duration-500 rounded-full px-8 py-4 shadow-xl hover:-translate-y-1 group"
+                        style="background: radial-gradient(circle at 10% 0%, #fed7aa 0%, #fb923c 100%);">
+                        <span class="relative z-10 text-sm font-bold text-white uppercase tracking-wide">Lançar
+                            Projeto</span>
+                        <div class="relative z-10 flex items-center justify-center w-6 h-6 bg-white/20 rounded-full">
+                            <i
+                                class="ph ph-arrow-up-right text-white font-bold group-hover:rotate-45 transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <button
+                        class="btn-secondary-future flex items-center gap-3 rounded-full px-8 py-4 text-zinc-600 font-bold text-sm tracking-wide uppercase transition-all duration-300 hover:text-brand-orange">
+                        Ver Tecnologias
+                        <i class="ph ph-stack text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex items-center gap-8 pt-2 slide-up stagger-4">
+                    <div class="flex items-center">
+                        <div class="text-center px-2">
+                            <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Impacto</p>
+                            <p class="text-lg font-bold text-zinc-900">$20M+</p>
+                        </div>
+                        <div class="curve-separator opacity-40 ml-6"></div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="text-center px-2">
+                            <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Precisão</p>
+                            <p class="text-lg font-bold text-zinc-900">99.9%</p>
+                        </div>
+                        <div class="curve-separator opacity-40 ml-6"></div>
+                    </div>
+                    <div class="text-center px-2">
+                        <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Ferramentas</p>
+                        <p class="text-lg font-bold text-zinc-900">Python</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Photo + Tech Badges -->
+            <div
+                class="lg:col-span-5 relative perspective-distant transform-style-preserve-3d flex flex-col items-center gap-4">
+                <!-- Photo Card -->
+                <div id="subject-card"
+                    class="relative group w-[300px] lg:w-[360px] aspect-[4/5] transform-style-preserve-3d transition-transform duration-300 ease-out slide-up stagger-2">
+                    <div
+                        class="absolute inset-0 rounded-[2.5rem] bg-zinc-900 overflow-hidden shadow-2xl border border-white/10">
+                        <img src="/Users/lucaspetry/Downloads/foto-lucas-petry.png"
+                            class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 opacity-90 saturate-50 hover:saturate-100"
+                            alt="Lucas Petry" />
+                    </div>
+                    <!-- Skill card floating top-right -->
+                    <div class="absolute -top-8 -right-8 glass-card rounded-2xl p-4 w-44 shadow-2xl parallax-layer"
+                        data-speed="0.08">
+                        <div class="flex items-center justify-between mb-3">
+                            <i class="ph ph-brackets-curly text-brand-orange"></i>
+                            <span class="text-[10px] text-emerald-400 font-bold">LIVE</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                            <div class="h-full w-[92%] bg-brand-orange"></div>
+                        </div>
+                        <p class="text-[10px] text-white/60 mt-2">Python Avançado <span class="text-white">92%</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tech Badge Pills — below the photo, aligned -->
+                <div class="flex flex-wrap justify-center gap-2 w-full max-w-[360px]">
+                    <div class="flex items-center gap-2 bg-zinc-900 text-white rounded-full px-4 py-2 shadow-lg">
+                        <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest">SQL_Maestro</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span
+                            class="text-[10px] font-bold uppercase tracking-widest text-zinc-900">Python_Engine_V4</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-900">Tableau_Pro</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 bg-zinc-100 border border-zinc-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-900">ML_Analytics</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- Redesigned Kinetic Timeline (2020-2025) -->
+    <section class="timeline-section pt-32">
+        <div class="max-w-7xl mx-auto px-6 mb-32 text-center slide-up stagger-1">
+            <h2 class="text-4xl lg:text-6xl font-medium text-white tracking-tighter leading-none uppercase mb-4">
+                A experiência <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 font-light">que
+                    posso aplicar na sua empresa.</span>
+            </h2>
+            <div class="h-[1px] w-24 bg-brand-orange/40 mx-auto mt-8"></div>
+        </div>
+
+        <div class="timeline-path-container !top-[450px]">
+            <div id="progress-line" class="timeline-progress-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative px-6">
+
+            <!-- 2020 Milestone - Nubank -->
+            <div class="experience-row experience-node" data-year="2020">
+                <div class="experience-content flex justify-end">
+                    <div class="tech-card text-right border-purple-500/20 shadow-lg shadow-purple-500/5">
+                        <div class="flex items-center justify-end gap-3 mb-4">
+                            <span class="tech-label">Genesis // 2020</span>
+                            <div
+                                class="w-10 h-10 rounded-xl bg-white p-2 border border-purple-500/20 flex items-center justify-center overflow-hidden">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Nubank_logo_2021.svg"
+                                    class="w-full h-full object-contain" alt="Nubank" />
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-4xl text-white mt-1 mb-2 uppercase">Nubank // Analytics</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed max-w-sm ml-auto">Dominei a arquitetura de
+                            queries e pipelines de limpeza de dados em escala para operações logísticas de fintech.</p>
+                    </div>
+                </div>
+                <div class="experience-spacer">
+                    <div class="year-node">
+                        <div class="year-inner"></div>
+                        <span class="year-label">2020</span>
+                    </div>
+                </div>
+                <div class="experience-content"></div>
+            </div>
+
+            <!-- 2021 Milestone - Google -->
+            <div class="experience-row experience-node" data-year="2021">
+                <div class="experience-content"></div>
+                <div class="experience-spacer">
+                    <div class="year-node">
+                        <div class="year-inner"></div>
+                        <span class="year-label" style="left: auto; right: 60px;">2021</span>
+                    </div>
+                </div>
+                <div class="experience-content">
+                    <div class="tech-card border-blue-500/20 shadow-lg shadow-blue-500/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-white p-2 border border-blue-500/20 flex items-center justify-center overflow-hidden">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                    class="w-full h-full object-contain" alt="Google" />
+                            </div>
+                            <span class="tech-label">Growth // 2021</span>
+                        </div>
+                        <h3 class="font-oswald text-4xl text-white mt-1 mb-2 uppercase">Google // Risco</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed max-w-sm">Arquitetura de modelos de
+                            credit-scoring reduzindo a latência de verificação manual em 45% em escala global.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2023 Milestone - Meta -->
+            <div class="experience-row experience-node" data-year="2023">
+                <div class="experience-content flex justify-end">
+                    <div class="tech-card text-right border-emerald-500/20 shadow-lg shadow-emerald-500/5">
+                        <div class="flex items-center justify-end gap-3 mb-4">
+                            <span class="tech-label">Meta // 2023</span>
+                            <div
+                                class="w-10 h-10 rounded-xl bg-white p-2 border border-emerald-500/20 flex items-center justify-center overflow-hidden">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg"
+                                    class="w-full h-full object-contain" alt="Meta" />
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-4xl text-white mt-1 mb-2 uppercase">Meta // Inteligência</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed max-w-sm ml-auto">Conectando clusters
+                            técnicos e estratégia executiva de alto nível através de inteligência de decisão.</p>
+                    </div>
+                </div>
+                <div class="experience-spacer">
+                    <div class="year-node">
+                        <div class="year-inner"></div>
+                        <span class="year-label">2023</span>
+                    </div>
+                </div>
+                <div class="experience-content"></div>
+            </div>
+
+            <!-- 2025 Milestone - OpenAI -->
+            <div class="experience-row experience-node" data-year="2025">
+                <div class="experience-content"></div>
+                <div class="experience-spacer">
+                    <div class="year-node">
+                        <div class="year-inner"></div>
+                        <span class="year-label" style="left: auto; right: 60px;">2025</span>
+                    </div>
+                </div>
+                <div class="experience-content">
+                    <div class="tech-card bg-white/5 backdrop-blur-md border-white/20 shadow-lg shadow-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-white p-2 border border-zinc-400/20 flex items-center justify-center overflow-hidden">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg"
+                                    class="w-full h-full object-contain" alt="OpenAI" />
+                            </div>
+                            <span class="tech-label">OpenAI // 2025</span>
+                        </div>
+                        <h3 class="font-oswald text-4xl text-white mt-1 mb-2 uppercase">Arq. Preditiva</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed max-w-sm">Liderando a transição para a
+                            autonomia total de dados via modelos Gerativos e Preditivos para stacks de dados prontas
+                            para AGI.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 3: Project Showcase (The Matrix Grid) -->
+    <section class="project-section pt-16 pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-20 text-center slide-up">
+            <h2 class="text-4xl lg:text-7xl font-medium text-white tracking-tighter leading-none uppercase mb-6">
+                Dados arquitetados <br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-700 font-light italic">para
+                    decisões.</span>
+            </h2>
+            <p class="text-neutral-500 font-mono text-xs uppercase tracking-[0.3em] max-w-lg mx-auto">
+                // TECHNICAL_REPOSITORY // UNIT_03 // PROJECTS
+            </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project 01: Supply Chain -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_supply_chain_1772648438317.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="Supply Chain" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-01 //
+                                PREDICTIVE</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="font-mono text-[9px] text-emerald-500 uppercase">Live_Model</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Cadeia de Suprimentos Global</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Modelagem preditiva para otimização
+                            logística em 142 nós globais.</p>
+                    </div>
+                </div>
+
+                <!-- Project 02: Fintech Risk -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_fintech_risk_1772648516985.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="Fintech Risk" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-02 //
+                                ANALYTICS</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                <span class="font-mono text-[9px] text-blue-500 uppercase">Verified</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Inteligência de Risco</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Dashboard de avaliação de risco de alta
+                            fidelidade para carteiras de renda variável institucional.</p>
+                    </div>
+                </div>
+
+                <!-- Project 03: Neural Sentiment -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_neural_sentiment_1772648627216.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="Neural Sentiment" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-03 //
+                                DEEP_LEARNING</span>
+                            <div class="flex items-center gap-1.5">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></span>
+                                <span class="font-mono text-[9px] text-purple-400 uppercase">Treinando_98%</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Rede Neural de Sentimentos</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Modelo NLP para estratégia executiva em
+                            tempo real baseada em rumores de mercado.</p>
+                    </div>
+                </div>
+
+                <!-- Project 04: NFT Market -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-zinc-100/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_nft_market_1772648691380.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="NFT Market" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-04 //
+                                BLOCKCHAIN</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-zinc-100"></span>
+                                <span class="font-mono text-[9px] text-zinc-100 uppercase">Indexado</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Inteligência de Mercado</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Rastreamento abrangente de liquidez de
+                            ativos digitais e volatilidade de preços-piso.</p>
+                    </div>
+                </div>
+
+                <!-- Project 05: Healthcare Opt -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_healthcare_opt_1772648705325.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="Healthcare Opt" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-05 //
+                                HEALTH_TECH</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                <span class="font-mono text-[9px] text-emerald-400 uppercase">Sincronizado</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Otimização de Recursos</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Mecanismo de alocação de recursos médicos
+                            reduzindo o tempo de espera no pronto-socorro em 32%.</p>
+                    </div>
+                </div>
+
+                <!-- Project 06: Retail Analytics -->
+                <div
+                    class="group relative bg-zinc-900/40 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all duration-500">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="/Users/lucaspetry/.gemini/antigravity/brain/349d31b2-f9de-4bb5-bd6b-81aefa0b6c4d/project_retail_analytics_1772648728358.png"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            alt="Retail Analytics" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">PRJ-06 //
+                                COMPUTER_VISION</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                                <span class="font-mono text-[9px] text-brand-orange uppercase">Processando</span>
+                            </div>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-white uppercase mb-1">Mapas de Calor Comportamentais</h3>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Análise de piso varejista usando sistemas de
+                            visão autônomos para mapeamento de fluxo de tráfego.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Testimonials (Trusted Validation) -->
+    <section class="testimonial-section py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-20 text-center slide-up">
+            <h2 class="text-4xl lg:text-7xl font-medium text-white tracking-tighter leading-none uppercase mb-6">
+                Validado por <br />
+                <span class="text-brand-orange font-light italic">Líderes do Setor</span>
+            </h2>
+            <p class="text-zinc-500 max-w-lg mx-auto text-sm font-medium">Insights dos engenheiros e diretores que
+                integraram meus sistemas de dados em infraestruturas globais.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 testimonial-columns-container">
+            <!-- Column 1 -->
+            <div class="testimonial-column" style="animation-duration: 25s;">
+                <!-- Set 1 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah Jenkins"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Sarah Jenkins</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Diretora // Meta
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"A capacidade do Lucas de conectar clusters
+                        técnicos e estratégia executiva é incomparável. Seus insights na Meta redefiniram como abordamos
+                        a inteligência de decisão baseada em dados."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg"
+                            class="h-4 opacity-30 grayscale invert" alt="Meta" />
+                        <span class="text-[10px] font-mono text-zinc-600">PARCEIRO_VERIFICADO</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=marina" alt="Marina Silva"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Marina Silva</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Head de Crescimento
+                                //
+                                Nubank</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Dados são tão bons quanto as decisões que
+                        eles impulsionam. O Lucas não apenas analisa; ele arquitetou modelos que geraram um aumento real
+                        na conversão para nossas verticais de fintech."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Nubank_logo_2021.svg"
+                            class="h-5 opacity-30 grayscale invert" alt="Nubank" />
+                        <span class="text-[10px] font-mono text-zinc-600">growth_engine_v4</span>
+                    </div>
+                </div>
+                <!-- Duplicate for Infinite Scroll -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah Jenkins"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Sarah Jenkins</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Diretora // Meta
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"A capacidade do Lucas de conectar clusters
+                        técnicos e estratégia executiva é incomparável. Seus insights na Meta redefiniram como abordamos
+                        a inteligência de decisão baseada em dados."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg"
+                            class="h-4 opacity-30 grayscale invert" alt="Meta" />
+                        <span class="text-[10px] font-mono text-zinc-600">VERIFIED_PARTNER</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=marina" alt="Marina Silva"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Marina Silva</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Head of Growth //
+                                Nubank</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Dados são tão bons quanto as decisões que
+                        eles impulsionam. O Lucas não apenas analisa; ele arquitetou modelos que geraram um aumento real
+                        na conversão para nossas verticais de fintech."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Nubank_logo_2021.svg"
+                            class="h-5 opacity-30 grayscale invert" alt="Nubank" />
+                        <span class="text-[10px] font-mono text-zinc-600">growth_engine_v4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="testimonial-column reverse" style="animation-duration: 30s;">
+                <!-- Set 1 -->
+                <div class="testimonial-card border-brand-orange/20">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=david" alt="David Chen"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">David Chen</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Cientista Sênior //
+                                Google</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Os algoritmos de pontuação de risco que o
+                        Lucas implementou reduziram nossa latência de verificação manual em quase 45%. Uma aula de
+                        otimização de performance e higiene de dados."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+                            class="h-4 opacity-30 grayscale invert text-white" alt="Google" />
+                        <span class="text-[10px] font-mono text-brand-orange/50">RISK_PROTOCOL_01</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=alex" alt="Alex Rivera"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Alex Rivera</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Líder de Arq. de IA
+                                //
+                                OpenAI</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Lucas redefiniu nosso pipeline de síntese
+                        de dados para treinamento de modelos. Seu fluxo arquitetado permitiu escalar insights 3x mais
+                        rápido sem comprometer a integridade do sinal."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg"
+                            class="h-4 opacity-30 grayscale invert" alt="OpenAI" />
+                        <span class="text-[10px] font-mono text-zinc-600">NEURAL_FLOW_V3</span>
+                    </div>
+                </div>
+                <!-- Duplicate -->
+                <div class="testimonial-card border-brand-orange/20">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=david" alt="David Chen"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">David Chen</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Senior Scientist //
+                                Google</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Os algoritmos de pontuação de risco que o
+                        Lucas implementou reduziram nossa latência de verificação manual em quase 45%. Uma aula de
+                        otimização de performance e higiene de dados."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+                            class="h-4 opacity-30 grayscale invert text-white" alt="Google" />
+                        <span class="text-[10px] font-mono text-brand-orange/50">RISK_PROTOCOL_01</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=alex" alt="Alex Rivera"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Alex Rivera</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">AI Arch Lead //
+                                OpenAI</p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Lucas redefined our data synthesis pipeline
+                        for model training. His architected flow allowed us to scale insights 3x faster without
+                        compromising signal integrity."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg"
+                            class="h-4 opacity-30 grayscale invert" alt="OpenAI" />
+                        <span class="text-[10px] font-mono text-zinc-600">NEURAL_FLOW_V3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="testimonial-column md:hidden lg:flex" style="animation-duration: 20s;">
+                <!-- Set 1 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=marcus" alt="Marcus Thorne"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Marcus Thorne</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Líder de Ops //
+                                Tesla
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Integrou visibilidade da cadeia de
+                        suprimentos em tempo real que economizou centenas de horas em relatórios. Seu stack técnico está
+                        anos à frente do padrão da indústria."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <i class="ph ph-lightning text-zinc-800 text-xl"></i>
+                        <span class="text-[10px] font-mono text-zinc-600">AUTO_LOGIC_SYNC</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=elena" alt="Elena Popova"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Elena Popova</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Líder de Dados //
+                                Stripe
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Lucas tem um talento raro para encontrar a
+                        narrativa em conjuntos de dados complexos. Seus designs de dashboard para nossas operações
+                        financeiras foram belos e altamente funcionais."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <i class="ph ph-credit-card text-zinc-800 text-xl"></i>
+                        <span class="text-[10px] font-mono text-zinc-600">FIN_OPS_V2</span>
+                    </div>
+                </div>
+                <!-- Duplicate -->
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=marcus" alt="Marcus Thorne"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Marcus Thorne</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Ops Lead // Tesla
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Integrated real-time supply chain
+                        visibility that saved hundreds of hours in reporting. His technical stack is years ahead of the
+                        industry standard."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <i class="ph ph-lightning text-zinc-800 text-xl"></i>
+                        <span class="text-[10px] font-mono text-zinc-600">AUTO_LOGIC_SYNC</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                            <img src="https://i.pravatar.cc/150?u=elena" alt="Elena Popova"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Elena Popova</h4>
+                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Data Lead // Stripe
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-zinc-300 text-sm leading-relaxed italic">"Lucas has a rare talent for finding the
+                        narrative in complex datasets. His dashboard designs for our financial operations were both
+                        beautiful and highly functional."</p>
+                    <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <i class="ph ph-credit-card text-zinc-800 text-xl"></i>
+                        <span class="text-[10px] font-mono text-zinc-600">FIN_OPS_V2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-20 border-t border-zinc-900 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em] mb-4">Sistema de Inteligência Estratégica</p>
+            <p class="text-zinc-400 text-sm">&copy; 2026 Lucas Petry. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] contrast-125 z-[100]"
+        style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+
+    <script>
+        const card = document.getElementById('subject-card');
+        const layers = document.querySelectorAll('.parallax-layer');
+        const dotBg = document.getElementById('dot-bg');
+
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            card.style.transform = `rotateX(${(clientY - centerY) / 60}deg) rotateY(${(centerX - clientX) / 60}deg)`;
+            layers.forEach(layer => {
+                const speed = layer.getAttribute('data-speed');
+                layer.style.transform = `translate(${(clientX - centerX) * speed}px, ${(clientY - centerY) * speed}px)`;
+            });
+            dotBg.style.transform = `translate(${(clientX - centerX) / 120}px, ${(clientY - centerY) / 120}px)`;
+        });
+
+        // KINETIC TIMELINE LOGIC
+        const timeline = document.querySelector('.timeline-section');
+        const progressBar = document.getElementById('progress-line');
+        const nodes = document.querySelectorAll('.year-node');
+        const rows = document.querySelectorAll('.experience-row');
+
+        window.addEventListener('scroll', () => {
+            const rect = timeline.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Recalculated progress (starts after headline)
+            let progress = 0;
+            const headlineOffset = 450;
+            if (rect.top < windowHeight / 2) {
+                const totalHeight = timeline.offsetHeight - headlineOffset;
+                const scrollIn = (windowHeight / 2) - rect.top - headlineOffset;
+                progress = Math.min(Math.max((scrollIn / totalHeight) * 100, 0), 100);
+            }
+            progressBar.style.height = `${progress}%`;
+
+            // Activate nodes and rows
+            rows.forEach((row, index) => {
+                const rowRect = row.getBoundingClientRect();
+                if (rowRect.top < windowHeight * 0.75) {
+                    row.classList.add('is-visible');
+                    nodes[index].classList.add('active');
+                } else {
+                    row.classList.remove('is-visible');
+                    nodes[index].classList.remove('active');
+                }
+            });
+
+            // Handle slide-up elements
+            const slideUps = document.querySelectorAll('.slide-up');
+            slideUps.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight * 0.85) {
+                    el.classList.add('is-visible');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
